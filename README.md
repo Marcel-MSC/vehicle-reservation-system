@@ -193,16 +193,6 @@ NODE_ENV=development
 - `PUT /api/reservations/:id/cancel` - Cancelar reserva (protegido)
 - `GET /api/reservations` - Todas reservas (protegido - admin)
 
-## 🤝 Contribuição
-
-Este projeto foi desenvolvido como parte de um desafio técnico. Para contribuições:
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
-
 ## 📝 Licença
 
 MIT
