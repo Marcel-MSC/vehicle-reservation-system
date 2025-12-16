@@ -15,11 +15,15 @@ Sistema completo para gestão de reservas de veículos com backend em Node.js + 
 ### Frontend (Angular 18)
 - ✅ Tela de Login
 - ✅ Tela de Cadastro
+- ✅ Tela de Boas-vindas
 - ✅ Listagem de Veículos Disponíveis
 - ✅ Sistema de Reservas
 - ✅ Perfil de Usuário com Reservas
-- ✅ Painel de Administração
+- ✅ Gerenciamento de Usuários (Admin)
+- ✅ Gerenciamento de Veículos (Admin)
+- ✅ Painel de Administração Completo
 - ✅ Interface Responsiva com Material Design
+- ✅ Diálogos Modais para CRUD
 - ✅ Proteção de rotas com Auth Guard
 
 ## 🧩 Regras de Negócio
@@ -85,11 +89,14 @@ Sistema completo para gestão de reservas de veículos com backend em Node.js + 
 ### Públicas
 - `/login` - Tela de login
 - `/register` - Tela de cadastro
+- `/welcome` - Tela de boas-vindas
 
 ### Privadas (requer autenticação)
 - `/vehicles` - Listagem de veículos disponíveis
+- `/vehicles/create` - Criar novo veículo (Admin)
 - `/profile` - Perfil do usuário e reservas
-- `/admin` - Painel de administração
+- `/users` - Gerenciamento de usuários (Admin)
+- `/admin` - Painel de administração completo
 
 ## 🔧 Tecnologias Utilizadas
 
@@ -133,10 +140,18 @@ vehicle-reservation-system/
 ├── frontend/             # Aplicação Angular
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── guards/   # Guards de rota
-│   │   │   ├── pages/    # Componentes de página
-│   │   │   ├── services/ # Serviços
-│   │   │   └── ...       # Configurações Angular
+│   │   │   ├── components/ # Componentes compartilhados
+│   │   │   ├── guards/     # Guards de rota
+│   │   │   ├── pages/      # Páginas da aplicação
+│   │   │   │   ├── admin/          # Painel admin
+│   │   │   │   ├── login/          # Tela de login
+│   │   │   │   ├── profile/        # Perfil usuário
+│   │   │   │   ├── register/       # Cadastro
+│   │   │   │   ├── users/          # Gerenciamento usuários
+│   │   │   │   ├── vehicles/       # Veículos e criação
+│   │   │   │   └── welcome/        # Boas-vindas
+│   │   │   ├── services/   # Serviços (API, Auth)
+│   │   └── app.routes.ts   # Configuração de rotas
 │   └── package.json
 │
 └── README.md             # Documentação
