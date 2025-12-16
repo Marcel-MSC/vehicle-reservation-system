@@ -6,6 +6,7 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
+  role: 'user' | 'admin';
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
@@ -33,6 +34,11 @@ const userSchema = new Schema<IUser>(
       required: [true, 'Senha é obrigatória'],
       minlength: [6, 'Senha deve ter pelo menos 6 caracteres'],
       select: false,
+    },
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user',
     },
   },
   {

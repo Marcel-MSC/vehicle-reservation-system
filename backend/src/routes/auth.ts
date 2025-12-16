@@ -1,12 +1,16 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
-import { authenticate } from '../middleware/auth';
+import { authenticate, isAdmin } from '../middleware/auth';
 import {
   register,
   login,
   getProfile,
   updateProfile,
-  deleteProfile
+  deleteProfile,
+  getAllUsers,
+  createUser,
+  updateUserById,
+  deleteUserById
 } from '../controllers/authController';
 
 const router = Router();
@@ -46,5 +50,31 @@ router.put(
 );
 
 router.delete('/profile', deleteProfile);
+
+// Admin routes
+router.get('/users', isAdmin, getAllUsers);
+
+router.post(
+  '/users',
+  isAdmin,
+  [
+    body('name').trim().isLength({ min: 2, max: 100 }).withMessage('Nome deve ter entre 2 e 100 caracteres'),
+    body('email').isEmail().normalizeEmail().withMessage('Email deve ser válido'),
+    body('password').isLength({ min: 6 }).withMessage('Senha deve ter pelo menos 6 caracteres')
+  ],
+  createUser
+);
+
+router.put(
+  '/users/:id',
+  isAdmin,
+  [
+    body('name').trim().isLength({ min: 2, max: 100 }).withMessage('Nome deve ter entre 2 e 100 caracteres'),
+    body('email').isEmail().normalizeEmail().withMessage('Email deve ser válido')
+  ],
+  updateUserById
+);
+
+router.delete('/users/:id', isAdmin, deleteUserById);
 
 export default router;

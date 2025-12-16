@@ -1,86 +1,114 @@
 [
     {
-        "name": "Partner",
-        "year": "2016",
-        "type": "Utilitário",
-        "engine": "1.6",
-        "size": "2"
-    },
-    {
-        "name": "Fiorino",
-        "year": "2017",
-        "type": "Utilitário leve",
-        "engine": "1.6",
-        "size": "2"
-    },
-    {
-        "name": "Doblo",
-        "year": "2018",
-        "type": "Minivan",
-        "engine": "1.8",
-        "size": "7"
-    },
-    {
-        "name": "Toro",
-        "year": "2016",
-        "type": "Picape média",
-        "engine": "1.6",
-        "size": "5"
-    },
-    {
-        "name": "Ford Ká",
+        "name": "Ford Ká Hatch",
         "year": "2019",
-        "type": "Sedan Compacto",
+        "type": "Hatchback",
         "engine": "1.0",
         "size": "5"
     },
     {
-        "name": "Versa",
-        "year": "2019",
-        "type": "Sedan médio",
-        "engine": "1.4",
-        "size": "5"
-    },
-    {
-        "name": "Jetta",
-        "year": "2021",
-        "type": "Sedan grande",
-        "engine": "2.0",
-        "size": "5"
-    },
-    {
-        "name": "Saveiro",
-        "year": "2018",
-        "type": "Picape leve-média",
+        "name": "Renault Duster",
+        "year": "2020",
+        "type": "SUV",
         "engine": "1.6",
         "size": "5"
     },
     {
-        "name": "Strada",
-        "year": "2016",
-        "type": "Picape leve",
-        "engine": "1.4",
-        "size": "2"
-    },
-    {
-        "name": "Camaro",
-        "year": "2017",
-        "type": "Coupé",
+        "name": "Jeep Compass Longitude",
+        "year": "2021",
+        "type": "SUV Médio",
         "engine": "2.0",
-        "size": "4"
+        "size": "5"
     },
     {
-        "name": "T-Cross",
+        "name": "Caoa Chery Tiggo",
+        "year": "2021",
+        "type": "SUV Compacto",
+        "engine": "1.5",
+        "size": "5"
+    },
+    {
+        "name": "Volkswagen T-Cross",
         "year": "2020",
         "type": "Crossover",
         "engine": "1.6",
         "size": "5"
     },
     {
-        "name": "Tiggo 8",
-        "year": "2021",
-        "type": "SUV Grande",
+        "name": "Chevrolet Camaro",
+        "year": "2020",
+        "type": "Coupé Esportivo",
         "engine": "2.0",
+        "size": "4"
+    },
+    {
+        "name": "Fiat Strada",
+        "year": "2018",
+        "type": "Picape Leve",
+        "engine": "1.4",
+        "size": "2"
+    },
+    {
+        "name": "Volkswagen Saveiro Robust",
+        "year": "2019",
+        "type": "Picape Leve",
+        "engine": "1.6",
+        "size": "2"
+    },
+    {
+        "name": "Fiat Toro",
+        "year": "2019",
+        "type": "Picape Média",
+        "engine": "1.8",
+        "size": "5"
+    },
+    {
+        "name": "Ford Ká Sedan",
+        "year": "2019",
+        "type": "Sedan Compacto",
+        "engine": "1.0",
+        "size": "5"
+    },
+    {
+        "name": "Nissan Versa",
+        "year": "2020",
+        "type": "Sedan Médio",
+        "engine": "1.6",
+        "size": "5"
+    },
+    {
+        "name": "Jetta",
+        "year": "2019",
+        "type": "Sedan Grande",
+        "engine": "2.0",
+        "size": "5"
+    },
+    {
+        "name": "Fiat Doblo",
+        "year": "2010",
+        "type": "Furgão",
+        "engine": "1.8",
         "size": "7"
+    },
+    {
+        "name": "Fiat Fiorino",
+        "year": "2018",
+        "type": "Utilitário Leve",
+        "engine": "1.4",
+        "size": "2"
+    },
+    {
+        "name": "Peugeot Partner",
+        "year": "2017",
+        "type": "Utilitário",
+        "engine": "1.6",
+        "size": "3"
+    },
+    {
+        "name": "Mini John Cooper Works",
+        "year": "2021",
+        "type": "Hatchback Esportivo",
+        "engine": "1.5",
+        "size": "4"
     }
 ]

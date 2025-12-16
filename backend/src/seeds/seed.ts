@@ -3,6 +3,7 @@ import { Vehicle } from '../models/Vehicle';
 import { User } from '../models/User';
 import fs from 'fs';
 import path from 'path';
+import bcrypt from 'bcryptjs';
 
 interface VehicleData {
   name: string;
@@ -16,39 +17,49 @@ const seedVehicles = async (): Promise<void> => {
   try {
     console.log('🌱 Iniciando seed de veículos...');
 
-    // Load vehicle data from JSON file
-    const vehiclesPath = path.join(__dirname, '../../assets/carros.json');
+    // Carrega os dados dos veículos e as imagens dinamicamente
+    const assetsPath = path.join(__dirname, '../../../assets');
+    const vehiclesPath = path.join(assetsPath, 'carros.json');
     const vehiclesData = JSON.parse(fs.readFileSync(vehiclesPath, 'utf8')) as VehicleData[];
+
+    // Mapeamento específico das imagens baseado no nome do veículo
+    const imageMapping: { [key: string]: string } = {
+      'Imagem 9.png': 'Ford Ká Hatch',
+      'Imagem 15.png': 'Renault Duster',
+      'Imagem 16.png': 'Jeep Compass Longitude',
+      'Imagem 18.png': 'Caoa Chery Tiggo',
+      'Imagem 19.png': 'Volkswagen T-Cross',
+      'Imagem 20.png': 'Chevrolet Camaro',
+      'Imagem 22.png': 'Fiat Strada',
+      'Imagem 23.png': 'Volkswagen Saveiro Robust',
+      'Imagem 25.png': 'Fiat Toro',
+      'Imagem 26.png': 'Ford Ká Sedan',
+      'Imagem 27.png': 'Nissan Versa',
+      'Imagem 28.png': 'Jetta',
+      'Imagem 29.png': 'Fiat Doblo',
+      'Imagem 30.png': 'Fiat Fiorino',
+      'Imagem 31.png': 'Peugeot Partner',
+      'Imagem 32.png': 'Mini John Cooper Works'
+    };
 
     // Clear existing vehicles
     await Vehicle.deleteMany({});
     console.log('🗑️ Veículos existentes removidos');
 
-    // Create vehicles with images
-    const vehicleImages = [
-      'Imagem 9.png',
-      'Imagem 15.png',
-      'Imagem 16.png',
-      'Imagem 18.png',
-      'Imagem 19.png',
-      'Imagem 20.png',
-      'Imagem 22.png',
-      'Imagem 23.png',
-      'Imagem 25.png',
-      'Imagem 26.png',
-      'Imagem 27.png',
-      'Imagem 28.png'
-    ];
+    const vehicles = vehiclesData.map((vehicleData) => {
+      // Encontra a imagem correspondente baseada no nome do veículo
+      const imageFileName = Object.keys(imageMapping).find(key => imageMapping[key] === vehicleData.name);
 
-    const vehicles = vehiclesData.map((vehicleData, index) => ({
-      name: vehicleData.name,
-      year: vehicleData.year,
-      type: vehicleData.type,
-      engine: vehicleData.engine,
-      size: vehicleData.size,
-      imageUrl: `/assets/images/${vehicleImages[index]}`,
-      isAvailable: true
-    }));
+      return {
+        name: vehicleData.name,
+        year: vehicleData.year,
+        type: vehicleData.type,
+        engine: vehicleData.engine,
+        size: vehicleData.size,
+        imageUrl: imageFileName ? `http://localhost:3000/assets/Carros/${imageFileName}` : `http://localhost:3000/assets/Carros/default-car.jpg`,
+        isAvailable: true
+      };
+    });
 
     const createdVehicles = await Vehicle.insertMany(vehicles);
     console.log(`✅ ${createdVehicles.length} veículos criados com sucesso`);
@@ -68,22 +79,26 @@ const seedAdminUser = async (): Promise<void> => {
     console.log('🌱 Criando usuário administrador...');
 
     // Check if admin user already exists
-    const existingAdmin = await User.findOne({ email: 'admin@veiclereserva.com' });
+    const existingAdmin = await User.findOne({ email: 'admin@vehiclereservation.com' });
     if (existingAdmin) {
       console.log('👤 Usuário administrador já existe');
       return;
     }
 
+    // Hash the password before saving
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash('admin123', salt);
     // Create admin user
     const adminUser = new User({
       name: 'Administrador',
-      email: 'admin@veiclereserva.com',
-      password: 'admin123'
+      email: 'admin@vehiclereservation.com',
+      password: hashedPassword,
+      role: 'admin'
     });
 
     await adminUser.save();
     console.log('✅ Usuário administrador criado com sucesso');
-    console.log('📧 Email: admin@veiclereserva.com');
+    console.log('📧 Email: admin@vehiclereservation.com');
     console.log('🔑 Senha: admin123');
 
   } catch (error) {

@@ -43,7 +43,6 @@ const reservationSchema = new Schema<IReservation>(
 
 // Compound index for efficient queries
 reservationSchema.index({ user: 1, status: 1 });
-reservationSchema.index({ vehicle: 1, status: 1 });
 reservationSchema.index({ status: 1, reservedAt: -1 });
 
 // Prevent duplicate active reservations for same vehicle

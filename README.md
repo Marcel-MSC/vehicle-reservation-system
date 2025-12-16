@@ -1,232 +1,193 @@
-# 🚗 Sistema de Gestão de Reservas de Veículos
+# 🚗 Sistema de Reserva de Veículos
 
-Sistema completo para gestão de reservas de veículos desenvolvido em Node.js + TypeScript + MongoDB (Backend) e Angular 18 (Frontend).
+Sistema completo para gestão de reservas de veículos com backend em Node.js + TypeScript + MongoDB e frontend em Angular 18.
 
-## 📋 Funcionalidades
+## 📋 Funcionalidades Implementadas
 
-### ✅ Backend API (100% Concluído)
-- **Autenticação JWT** - Login e registro de usuários
-- **CRUD de Usuários** - Cadastro, edição, remoção e perfil
-- **CRUD de Veículos** - Cadastro, edição, remoção e listagem
-- **Sistema de Reservas** - Reserva, cancelamento e finalização
-- **Validação e Tratamento de Erros** - Middleware robusto
-- **Seed de Dados** - Dados iniciais para testes
+### Backend (API)
+- ✅ Autenticação JWT
+- ✅ CRUD de Usuários
+- ✅ CRUD de Veículos
+- ✅ CRUD de Reservas
+- ✅ Validação e tratamento de erros
+- ✅ Proteção de rotas com token JWT
 
-### 🔄 Frontend (Estrutura criada)
-- **Angular 18** - Estrutura base configurada
-- **Material Design** - Componentes prontos
-- **Interface Responsiva** - Design moderno
+### Frontend (Angular 18)
+- ✅ Tela de Login
+- ✅ Tela de Cadastro
+- ✅ Listagem de Veículos Disponíveis
+- ✅ Sistema de Reservas
+- ✅ Perfil de Usuário com Reservas
+- ✅ Painel de Administração
+- ✅ Interface Responsiva com Material Design
+- ✅ Proteção de rotas com Auth Guard
 
-## 🛠️ Tecnologias
-
-### Backend
-- **Node.js** - Runtime JavaScript
-- **TypeScript** - Tipagem estática
-- **Express.js** - Framework web
-- **MongoDB** - Banco de dados NoSQL
-- **Mongoose** - ODM para MongoDB
-- **JWT** - Autenticação por tokens
-- **bcryptjs** - Hash de senhas
-- **express-validator** - Validação de dados
-
-### Frontend
-- **Angular 18** - Framework frontend
-- **TypeScript** - Tipagem estática
-- **Angular Material** - Componentes UI
-- **RxJS** - Programação reativa
+## 🧩 Regras de Negócio
+- Todas as rotas, exceto login, são protegidas por token JWT
+- Um veículo não pode ser reservado caso já esteja reservado
+- Um usuário não pode ter mais de um veículo reservado simultaneamente
 
 ## 🚀 Como Executar
 
 ### Pré-requisitos
-- Node.js (versão 16 ou superior)
-- MongoDB (local ou MongoDB Atlas)
-- npm ou yarn
+- Node.js (v18+)
+- MongoDB (local ou Atlas)
+- Angular CLI (v18+)
 
-### 1. Clone o repositório
-```bash
-git clone <url-do-repositorio>
-cd vehicle-reservation-system
-```
+### Backend
+1. Navegue até a pasta `backend`:
+   ```bash
+   cd backend
+   ```
 
-### 2. Configure o Backend
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
 
-#### Instale as dependências:
-```bash
-cd backend
-npm install
-```
+3. Configure o MongoDB no arquivo `.env` (copie de `.env.example`):
+   ```env
+   MONGODB_URI=mongodb://localhost:27017/vehicle-reservation
+   JWT_SECRET=sua_chave_secreta_aqui
+   PORT=3000
+   ```
 
-#### Configure as variáveis de ambiente:
-```bash
-cp .env.example .env
-```
+4. Execute o backend:
+   ```bash
+   npm run dev
+   ```
 
-Edite o arquivo `.env` com suas configurações:
-```env
-PORT=3000
-NODE_ENV=development
-MONGODB_URI=mongodb://localhost:27017/vehicle-reservation
-JWT_SECRET=vehicle_reservation_secret_key_2024
-JWT_EXPIRES_IN=7d
-```
+5. (Opcional) Execute o seed para popular o banco com dados de teste:
+   ```bash
+   npm run seed
+   ```
 
-#### Execute o seed de dados (opcional):
-```bash
-npm run seed
-```
+### Frontend
+1. Navegue até a pasta `frontend`:
+   ```bash
+   cd frontend
+   ```
 
-#### Inicie o servidor:
-```bash
-npm run dev
-```
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
 
-O backend estará disponível em: `http://localhost:3000`
+3. Execute o frontend:
+   ```bash
+   ng serve
+   ```
 
-### 3. Configure o Frontend
+4. Acesse a aplicação em: `http://localhost:4200`
 
-#### Instale as dependências:
-```bash
-cd frontend
-npm install
-```
+## 📱 Telas Disponíveis
 
-#### Inicie o servidor de desenvolvimento:
-```bash
-npm start
-```
+### Públicas
+- `/login` - Tela de login
+- `/register` - Tela de cadastro
 
-O frontend estará disponível em: `http://localhost:4200`
+### Privadas (requer autenticação)
+- `/vehicles` - Listagem de veículos disponíveis
+- `/profile` - Perfil do usuário e reservas
+- `/admin` - Painel de administração
 
-## 📚 Documentação da API
+## 🔧 Tecnologias Utilizadas
 
-### Autenticação
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| POST | `/api/auth/register` | Registrar novo usuário |
-| POST | `/api/auth/login` | Fazer login |
-| GET | `/api/auth/profile` | Obter perfil do usuário |
-| PUT | `/api/auth/profile` | Atualizar perfil |
-| DELETE | `/api/auth/profile` | Remover usuário |
+### Backend
+- Node.js
+- TypeScript
+- Express
+- MongoDB com Mongoose
+- JWT para autenticação
+- Express Validator para validação
 
-### Veículos
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| GET | `/api/vehicles` | Listar todos os veículos |
-| GET | `/api/vehicles/available` | Listar veículos disponíveis |
-| GET | `/api/vehicles/:id` | Obter veículo por ID |
-| POST | `/api/vehicles` | Cadastrar novo veículo |
-| PUT | `/api/vehicles/:id` | Atualizar veículo |
-| DELETE | `/api/vehicles/:id` | Remover veículo |
+### Frontend
+- Angular 18
+- Angular Material
+- RxJS
+- TypeScript
+- SCSS
 
-### Reservas
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| GET | `/api/reservations/my-reservations` | Listar minhas reservas |
-| GET | `/api/reservations/all` | Listar todas as reservas |
-| GET | `/api/reservations/:id` | Obter reserva por ID |
-| POST | `/api/reservations` | Criar nova reserva |
-| PATCH | `/api/reservations/:id/release` | Finalizar reserva |
-| PATCH | `/api/reservations/:id/cancel` | Cancelar reserva |
+## 🎨 Interface
 
-### Headers de Autenticação
-Todas as rotas (exceto login) requieren o header:
-```
-Authorization: Bearer <token>
-```
+A interface foi desenvolvida com base no protótipo oficial no Figma:
+- Design responsivo
+- Material Design components
+- Navegação intuitiva
+- Feedback visual para ações do usuário
 
-## 🔐 Usuário Padrão
-
-O sistema cria automaticamente um usuário administrador durante o seed:
-
-- **Email**: admin@veiclereserva.com
-- **Senha**: admin123
-
-## 📁 Estrutura do Projeto
+## 📂 Estrutura do Projeto
 
 ```
 vehicle-reservation-system/
-├── backend/                 # API Node.js + TypeScript
+├── backend/              # API Node.js
 │   ├── src/
-│   │   ├── config/         # Configuração do banco
-│   │   ├── controllers/    # Controladores da API
-│   │   ├── middleware/     # Middleware de autenticação
-│   │   ├── models/         # Modelos do MongoDB
-│   │   ├── routes/         # Rotas da API
-│   │   ├── seeds/          # Seed de dados
-│   │   └── server.ts       # Servidor principal
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── .env
-├── frontend/               # Angular 18
+│   │   ├── config/       # Configurações
+│   │   ├── controllers/  # Controladores
+│   │   ├── middleware/   # Middlewares
+│   │   ├── models/       # Modelos MongoDB
+│   │   ├── routes/       # Rotas
+│   │   └── server.ts     # Servidor principal
+│   └── package.json
+│
+├── frontend/             # Aplicação Angular
 │   ├── src/
-│   │   └── app/           # Componentes Angular
-│   ├── angular.json
-│   ├── package.json
-│   └── tsconfig.json
-├── assets/                 # Assets do design
-│   ├── carros.json        # Dados dos veículos
-│   └── Carros/            # Imagens dos veículos
-└── README.md
+│   │   ├── app/
+│   │   │   ├── guards/   # Guards de rota
+│   │   │   ├── pages/    # Componentes de página
+│   │   │   ├── services/ # Serviços
+│   │   │   └── ...       # Configurações Angular
+│   └── package.json
+│
+└── README.md             # Documentação
 ```
 
-## 🧪 Testando a API
+## 🔒 Variáveis de Ambiente
 
-### 1. Registrar um usuário:
-```bash
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "João Silva",
-    "email": "joao@email.com",
-    "password": "123456"
-  }'
+Crie um arquivo `.env` na pasta `backend` com as seguintes variáveis:
+
+```env
+MONGODB_URI=mongodb://localhost:27017/vehicle-reservation
+JWT_SECRET=sua_chave_secreta_aqui
+PORT=3000
+NODE_ENV=development
 ```
 
-### 2. Fazer login:
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "joao@email.com",
-    "password": "123456"
-  }'
-```
+## 🎯 Endpoints da API
 
-### 3. Listar veículos:
-```bash
-curl -X GET http://localhost:3000/api/vehicles \
-  -H "Authorization: Bearer <seu-token>"
-```
+### Autenticação
+- `POST /api/auth/login` - Login de usuário
+- `POST /api/auth/register` - Cadastro de usuário
+- `GET /api/auth/profile` - Perfil do usuário (protegido)
+- `PUT /api/auth/profile` - Atualizar perfil (protegido)
+- `DELETE /api/auth/profile` - Excluir perfil (protegido)
 
-## 🛡️ Segurança
+### Veículos
+- `GET /api/vehicles` - Listar todos veículos (protegido)
+- `GET /api/vehicles/available` - Listar veículos disponíveis (protegido)
+- `GET /api/vehicles/:id` - Detalhes de veículo (protegido)
+- `POST /api/vehicles` - Criar veículo (protegido)
+- `PUT /api/vehicles/:id` - Atualizar veículo (protegido)
+- `DELETE /api/vehicles/:id` - Excluir veículo (protegido)
 
-- **Hash de senhas** com bcryptjs
-- **JWT para autenticação** com expiração
-- **Validação de dados** com express-validator
-- **Sanitização de inputs** contra SQL injection
-- **CORS configurado** para domínios específicos
-- **Tratamento de erros** robusto
+### Reservas
+- `POST /api/reservations` - Criar reserva (protegido)
+- `GET /api/reservations/user` - Minhas reservas (protegido)
+- `GET /api/reservations/:id` - Detalhes de reserva (protegido)
+- `PUT /api/reservations/:id/release` - Liberar reserva (protegido)
+- `PUT /api/reservations/:id/cancel` - Cancelar reserva (protegido)
+- `GET /api/reservations` - Todas reservas (protegido - admin)
 
-## 📋 Regras de Negócio Implementadas
+## 🤝 Contribuição
 
-✅ **Todas as rotas protegidas por token JWT** (exceto login)
-✅ **Veículo não pode ser reservado se já estiver reservado**
-✅ **Usuário não pode ter mais de um veículo reservado simultaneamente**
-✅ **Validação completa de dados** em todas as operações
-✅ **Controle de disponibilidade** de veículos em tempo real
+Este projeto foi desenvolvido como parte de um desafio técnico. Para contribuições:
 
-## 🎯 Status do Projeto
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abra um Pull Request
 
-- ✅ **Backend API**: 100% concluído e funcional
-- 🔄 **Frontend**: Estrutura criada, componentes em desenvolvimento
-- ✅ **Documentação**: README completo
-- ✅ **Configuração**: Pronta para deployment
+## 📝 Licença
 
-## 👨‍💻 Desenvolvido por
-
-Marcelo Carramanhos - Sistema de Reserva de Veículos para teste técnico.
-
----
-
-**📅 Data de entrega**: 15/12/2025
-**🎯 Objetivo**: Demonstrar habilidades em desenvolvimento full-stack com tecnologias modernas.
+MIT

@@ -7,6 +7,7 @@ export interface AuthRequest extends Request {
     id: string;
     email: string;
     name: string;
+    role: string;
   };
 }
 
@@ -31,6 +32,7 @@ export const authenticate = async (req: AuthRequest, res: Response, next: NextFu
       id: user._id.toString(),
       email: user.email,
       name: user.name,
+      role: user.role
     };
 
     next();
@@ -49,4 +51,12 @@ export const authorize = (...roles: string[]) => {
     }
     next();
   };
+};
+
+export const isAdmin = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+  if (!req.user || req.user.role !== 'admin') {
+    res.status(403).json({ error: 'Acesso negado - Somente administradores' });
+    return;
+  }
+  next();
 };

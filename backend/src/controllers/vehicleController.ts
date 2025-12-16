@@ -5,16 +5,36 @@ import { AuthRequest } from '../middleware/auth';
 
 export const getAllVehicles = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const { page = 1, limit = 10, search, type } = req.query;
-    
+    const { page = 1, limit = 10, search, type, year, engine, size } = req.query;
+
     const query: any = {};
-    
+
+    // Filtro de busca geral (name, type, year, engine, size)
     if (search) {
-      query.name = { $regex: search, $options: 'i' };
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { type: { $regex: search, $options: 'i' } },
+        { year: { $regex: search, $options: 'i' } },
+        { engine: { $regex: search, $options: 'i' } },
+        { size: { $regex: search, $options: 'i' } }
+      ];
     }
-    
+
+    // Filtros específicos
     if (type) {
       query.type = { $regex: type, $options: 'i' };
+    }
+
+    if (year) {
+      query.year = year;
+    }
+
+    if (engine) {
+      query.engine = engine;
+    }
+
+    if (size) {
+      query.size = size;
     }
 
     const options = {
